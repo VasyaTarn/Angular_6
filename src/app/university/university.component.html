@@ -1,0 +1,37 @@
+<h2>University</h2>
+<div class="container font-size">
+    <div class="row">
+        <div class="col-12 filters-block">
+            <h5>Sorting</h5>
+            <div class="d-flex flex-wrap justify-content-between">
+                <button class="btn btn-secondary" (click)="sortByCapacity()">Sort by Capacity</button>
+                <button class="btn btn-secondary" (click)="sortByName()">Sort by Name</button>
+                <select class="p-2" (change)="filterByGroup($event)">
+                    <option [value]="-1">All</option>
+                    <ng-container *ngFor="let group of groups; let i = index">
+                        <option [value]="i">{{ group.title }}</option>
+                    </ng-container>
+                </select>
+                <select class="p-2" (change)="filterByFaculty($event)">
+                    <option [value]="-1">All Faculties</option>
+                    <ng-container *ngFor="let faculty of faculties; let i = index">
+                        <option [value]="i">{{ faculty.title }}</option>
+                    </ng-container>
+                </select>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-12">
+            @for (audience of audiences | filters:selectedFacultyIndex; track $index)
+            {
+                <div class="element">
+                    <span class="title">{{audience.title}}</span>
+                    <span>{{getFacultyById(audience.facultyId)}}</span>
+                    <span>Capacity: {{audience.capacity}}</span>
+                </div>
+            }
+        </div>
+    </div>
+</div>
